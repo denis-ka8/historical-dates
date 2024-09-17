@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { HistoricalDate } from "../types/historicalDate";
+import { DateInterval } from "../types/dateInterval";
 
 interface HistoricalDateState {
 	list: HistoricalDate[];
@@ -9,55 +10,20 @@ interface HistoricalDateState {
 }
 
 const initialState: HistoricalDateState = {
-	list: [
-		{
-			eventId: "66eab006-df8f-490a-986d-f59acdf32bd8",
-			year: 2015,
-			description: "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
-			category: "Космос"
-		},
-		{
-			eventId: "66eab006-df8f-490a-986d-f59acdf32bd3",
-			year: 2016,
-			description: "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
-			category: "Космос"
-		},
-		{
-			eventId: "66eab006-df8f-490a-986d-f59acdf32bd2",
-			year: 2017,
-			description: "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
-			category: "Космос"
-		},
-		{
-			eventId: "66eab006-df8f-490a-986d-f59acdf321d8",
-			year: 2018,
-			description: "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
-			category: "Космос"
-		},
-		{
-			eventId: "66eab006-df8f-490a-986a-f59acdf32bd2",
-			year: 2019,
-			description: "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
-			category: "Космос"
-		},
-		{
-			eventId: "66eab006-df8f-490a-986d-f59acd2321d8",
-			year: 2020,
-			description: "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
-			category: "Космос"
-		},
-	],
+	list: [],
 	loading: false,
 	error: null,
 };
 
-export const fetchTeams = createAsyncThunk<
+export const fetchEvents = createAsyncThunk<
 	HistoricalDate[],
-	void,
+	DateInterval,
 	{ rejectValue: string }
->("api/events", async (_, thunkAPI) => {
+>("api/events", async (currentInterval, thunkAPI) => {
 	try {
-		const response = await axios.get("/api/events?start_date=&end_date=");
+		const response = await axios.get(
+			`/api/events?start_date=${currentInterval.yearStart}&end_date=${currentInterval.yearEnd}`
+		);
 		return response?.data;
 	} catch (error) {
 		thunkAPI.rejectWithValue("Failed to fetch posts");
@@ -70,15 +36,15 @@ const historicalDateSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder
-			.addCase(fetchTeams.pending, (state) => {
+			.addCase(fetchEvents.pending, (state) => {
 				state.loading = true;
 				state.error = null;
 			})
-			.addCase(fetchTeams.fulfilled, (state, action) => {
+			.addCase(fetchEvents.fulfilled, (state, action) => {
 				state.loading = false;
 				state.list = action.payload;
 			})
-			.addCase(fetchTeams.rejected, (state, action) => {
+			.addCase(fetchEvents.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.error.message || "Something went wrong";
 			});

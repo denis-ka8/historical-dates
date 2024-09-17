@@ -1,9 +1,10 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Mousewheel, Keyboard } from 'swiper/modules';
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+import { Navigation, Mousewheel, Keyboard } from "swiper/modules";
 import "swiper/css";
-import 'swiper/css/navigation';
+import "swiper/css/navigation";
 import { SwiperSliderItem } from "./SwiperSliderItem";
 import { HistoricalDate } from "../../types/historicalDate";
+import { useEffect, useRef } from "react";
 
 interface SwiperSliderProps {
 	sliderId: string;
@@ -11,16 +12,26 @@ interface SwiperSliderProps {
 }
 
 const SwiperSlider: React.FC<SwiperSliderProps> = ({ events }) => {
+	const swiperRef = useRef<SwiperRef>(null);
+
+	useEffect(() => {
+		if (swiperRef.current) {
+			swiperRef.current?.swiper?.slideTo(0, 0);
+			swiperRef.current?.swiper?.update();
+		}
+	}, [events]);
+
 	return (
 		<Swiper
-      slidesPerView={'auto'}
+			ref={swiperRef}
+			slidesPerView={"auto"}
 			spaceBetween={80}
-      slidesOffsetBefore={80}
-      slidesOffsetAfter={80}
-      navigation={true}
-      mousewheel={true}
-      keyboard={true}
-      modules={[Navigation, Mousewheel, Keyboard]}
+			slidesOffsetBefore={80}
+			slidesOffsetAfter={80}
+			navigation={true}
+			mousewheel={true}
+			keyboard={true}
+			modules={[Navigation, Mousewheel, Keyboard]}
 			className="my-swiper"
 		>
 			{events.map((event) => (

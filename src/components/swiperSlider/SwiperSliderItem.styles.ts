@@ -3,7 +3,7 @@ import { ACCENT_COLOR } from "../../styles";
 
 export const SliderItemTitle = styled.div`
   color: ${ACCENT_COLOR};
-  font-family: Bebas Neue;
+  font-family: BebasNeue;
   font-size: 25px;
   line-height: 30px;
   margin-bottom: 15px;

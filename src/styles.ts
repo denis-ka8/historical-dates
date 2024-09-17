@@ -63,7 +63,7 @@ export const GlobalStyle = createGlobalStyle`
 export const Wrapper = styled.div`
 	max-width: 1440px;
 	margin: 0 auto;
-  padding: 15px 0;
+  padding: 15px 0 100px;
 	min-height: 100vh;
 	border-left: 1px solid rgba(${MAIN_COLOR_RGB},.1);
 	border-right: 1px solid rgba(${MAIN_COLOR_RGB},.1);

@@ -7,11 +7,18 @@ import {
 	PositionedTitle,
 } from "./HistoricalDates.styles";
 import { SpinSlider } from "../spinSlider/SpinSlider";
+import useFetchEvents from "../swiperSlider/useFetchEvents";
+import useFetchIntervals from "./useFetchIntervals";
 
 const HistoricalDates: React.FC = () => {
 	const events = useAppSelector((state) => state.historicalDates.list);
 
+	const { currentInterval } = useFetchEvents();
+
 	const sliderId = "main-slider";
+	// const slider2Id = "second-slider";
+
+	useFetchIntervals();
 
 	return (
 		<HistoricalDatesPage>
@@ -28,6 +35,13 @@ const HistoricalDates: React.FC = () => {
 			<DatesSliderWrapper>
 				<SwiperSlider sliderId={sliderId} events={events} />
 			</DatesSliderWrapper>
+
+			{/* <br />
+			<br />
+			<br />
+			<br />
+			<SpinSlider sliderId={slider2Id} />
+			<SwiperSlider sliderId={slider2Id} events={events} /> */}
 		</HistoricalDatesPage>
 	);
 };

@@ -23,6 +23,8 @@ const SpinSliderNavigation: React.FC = () => {
 		dispatch(setNavigateTo(currentIndex + step));
 	};
 
+	if (!segments.length) return null;
+
 	return (
 		<SpinSliderNavigationWrapper>
 			<SpinSliderNavigationText>
