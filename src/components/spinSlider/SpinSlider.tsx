@@ -1,3 +1,4 @@
+import { useAppSelector } from "../../hook";
 import {
 	SpinSliderCircleWrapper,
 	SpinSliderWrapper,
@@ -11,6 +12,7 @@ interface SpinSliderProps {
 }
 
 const SpinSlider: React.FC<SpinSliderProps> = () => {
+	const { mode } = useAppSelector((state) => state.device);
 	return (
 		<>
 			<SpinSliderWrapper>
@@ -19,7 +21,7 @@ const SpinSlider: React.FC<SpinSliderProps> = () => {
 					<SpinSliderDate />
 				</SpinSliderCircleWrapper>
 			</SpinSliderWrapper>
-			<SpinSliderNavigation />
+			{mode === "desktop" && <SpinSliderNavigation />}
 		</>
 	);
 };

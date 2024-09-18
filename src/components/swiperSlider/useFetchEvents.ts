@@ -6,8 +6,7 @@ const useFetchEvents = () => {
 	const { currentInterval } = useAppSelector((state) => state.dateInterval);
 	const dispatch = useAppDispatch();
 
-	useEffect(() => {
-		console.log("currentInterval", currentInterval);
+	useEffect(() => {		
 		if (!currentInterval) return;
 
     dispatch(fetchEvents(currentInterval))

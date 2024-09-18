@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {
 	BACKGROUND_COLOR,
+	DEVICE,
 	ICONS_URL,
 	MAIN_COLOR,
 	MAIN_COLOR_RGB,
@@ -20,6 +21,11 @@ export const SpinSliderWrapper = styled.div`
 		top: 50%;
 		height: 1px;
 		background: rgba(${MAIN_COLOR_RGB},.1);
+	}
+	@media ${ DEVICE.mobile } {
+		&:before {
+			display: none;
+		}
 	}
 `;
 export const SpinSliderCircleWrapper = styled.div`
@@ -142,6 +148,13 @@ export const SliderDateText = styled.div`
 	font-weight: 700;
 	line-height: 160px;
 	letter-spacing: -0.02em;
+	@media ${ DEVICE.mobile } {
+		position: static;
+		transform: none;
+		gap: 40px;
+		font-size: 56px;
+		line-height: 72px;
+	}
 `;
 export const SliderDateLeft = styled.div`
 	text-align: right;
@@ -160,14 +173,23 @@ interface SpinSliderNavigationButtonProps {
 }
 export const SpinSliderNavigationWrapper = styled.div`
 	padding-left: 80px;
+	@media ${ DEVICE.mobile } {
+		padding: 0;
+	}
 `;
 export const SpinSliderNavigationText = styled.div`
 	margin-bottom: 20px;
+	@media ${ DEVICE.mobile } {
+		margin-bottom: 10px;
+	}
 `;
 export const SpinSliderNavigationButtons = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 20px;
+	@media ${ DEVICE.mobile } {
+		gap: 8px;
+	}
 `;
 export const SpinSliderNavigationButton = styled.div<SpinSliderNavigationButtonProps>`
 	width: 50px;
@@ -191,4 +213,9 @@ export const SpinSliderNavigationButton = styled.div<SpinSliderNavigationButtonP
 		}
 	`}
 	${(props) => props.$arrowLeft && `transform: rotate(180deg);`}
+	@media ${ DEVICE.mobile } {
+		width: 25px;
+		height: 25px;
+		background-size: 8px;
+	}
 `;

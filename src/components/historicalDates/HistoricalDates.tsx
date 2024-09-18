@@ -2,6 +2,7 @@ import { useAppSelector } from "../../hook";
 import { GradientTitle } from "../gradientTitle/GradientTitle";
 import { SwiperSlider } from "../swiperSlider/SwiperSlider";
 import {
+	DatesSliderDivider,
 	DatesSliderWrapper,
 	HistoricalDatesPage,
 	PositionedTitle,
@@ -9,16 +10,22 @@ import {
 import { SpinSlider } from "../spinSlider/SpinSlider";
 import useFetchEvents from "../swiperSlider/useFetchEvents";
 import useFetchIntervals from "./useFetchIntervals";
+import useWindowResize from "./useWindowResize";
+import { SpinSliderNavigation } from "../spinSlider/SpinSliderNavigation";
 
 const HistoricalDates: React.FC = () => {
 	const events = useAppSelector((state) => state.historicalDates.list);
+	const { mode } = useAppSelector((state) => state.device);
 
-	const { currentInterval } = useFetchEvents();
+	useWindowResize();
+
+	useFetchEvents();
 
 	const sliderId = "main-slider";
-	// const slider2Id = "second-slider";
 
 	useFetchIntervals();
+
+	console.log("mode", mode);
 
 	return (
 		<HistoricalDatesPage>
@@ -33,15 +40,11 @@ const HistoricalDates: React.FC = () => {
 			<SpinSlider sliderId={sliderId} />
 
 			<DatesSliderWrapper>
+				<DatesSliderDivider />
 				<SwiperSlider sliderId={sliderId} events={events} />
 			</DatesSliderWrapper>
 
-			{/* <br />
-			<br />
-			<br />
-			<br />
-			<SpinSlider sliderId={slider2Id} />
-			<SwiperSlider sliderId={slider2Id} events={events} /> */}
+			{mode === "mobile" && <SpinSliderNavigation />}
 		</HistoricalDatesPage>
 	);
 };

@@ -4,6 +4,9 @@ import { dateIntervals } from "./dateIntervals";
 
 export const handlers = [
 	http.get(`/api/events`, ({ request }) => {
+		if (!request?.url) {
+			return HttpResponse.json(historicalDates["2015"]);
+		}
 		const url = new URL(request.url);
 		const start_date = url.searchParams.get("start_date");
 

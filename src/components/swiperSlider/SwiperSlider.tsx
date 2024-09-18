@@ -25,14 +25,19 @@ const SwiperSlider: React.FC<SwiperSliderProps> = ({ events }) => {
 		<Swiper
 			ref={swiperRef}
 			slidesPerView={"auto"}
-			spaceBetween={80}
-			slidesOffsetBefore={80}
-			slidesOffsetAfter={80}
+			spaceBetween={25}
 			navigation={true}
 			mousewheel={true}
 			keyboard={true}
 			modules={[Navigation, Mousewheel, Keyboard]}
 			className="my-swiper"
+			breakpoints={{
+				1000: {
+					slidesOffsetBefore: 80,
+					slidesOffsetAfter: 80,
+					spaceBetween: 80
+				}
+			}}
 		>
 			{events.map((event) => (
 				<SwiperSlide key={event.eventId}>

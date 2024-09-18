@@ -1,4 +1,4 @@
-import { PRIMARY_COLOR, SECONDARY_COLOR } from "../../styles";
+import { DEVICE, PRIMARY_COLOR, SECONDARY_COLOR } from "../../styles";
 import styled from "styled-components";
 
 export const StyledTitle = styled.div`
@@ -6,6 +6,7 @@ export const StyledTitle = styled.div`
 	line-height: 67px;
 	position: relative;
   padding-left: 80px;
+	font-weight: 700;
 	&::before {
 		content: "";
 		position: absolute;
@@ -30,5 +31,14 @@ export const StyledTitle = styled.div`
 			${SECONDARY_COLOR} 100%
 		);
 		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="${PRIMARY_COLOR}",endColorstr="${SECONDARY_COLOR}",GradientType=1);
+	}
+
+	@media ${ DEVICE.mobile } {
+		font-size: 20px;
+		line-height: 24px;
+  	padding-left: 0px;
+		&::before {
+			display: none;
+		}
 	}
 `;

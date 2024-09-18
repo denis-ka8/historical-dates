@@ -10,6 +10,7 @@ const SpinSliderCircle: React.FC = () => {
 	const [rotateDeg, setRotateDeg] = useState(0);
 
 	const dispatch = useAppDispatch();
+	const { mode } = useAppSelector((state) => state.device);
 	const { segments, currentIndex, navTo } = useAppSelector(
 		(state) => state.dateInterval
 	);
@@ -66,6 +67,8 @@ const SpinSliderCircle: React.FC = () => {
 
 		setActive(navTo);
 	}, [navTo]);
+
+	if (mode === "mobile") return null;
 
 	return (
 		<SliderCircle ref={circleRef} rotate={rotateDeg}>

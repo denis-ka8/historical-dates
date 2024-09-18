@@ -9,6 +9,10 @@ export const ACCENT_COLOR = "#3877EE";
 export const PRIMARY_COLOR = "#3877EE";
 export const SECONDARY_COLOR = "#EF5DA8";
 
+export const DEVICE = {
+  mobile: `(max-width: 1000px)`,
+}
+
 export const GlobalStyle = createGlobalStyle`
   *,
   *:before,
@@ -33,6 +37,15 @@ export const GlobalStyle = createGlobalStyle`
   .my-swiper .swiper-slide {
     width: 320px;
   }
+	@media ${ DEVICE.mobile } {
+    .my-swiper .swiper-slide {
+      width: 280px;
+    }
+    .my-swiper .swiper-button-prev,
+    .my-swiper .swiper-button-next {
+      display: none;
+    }
+	}
   .my-swiper .swiper-button-disabled {
     display: none;
   }
@@ -79,6 +92,14 @@ export const Wrapper = styled.div`
     width: 1px;
     background: rgba(${MAIN_COLOR_RGB},.1);
   }
+	@media ${ DEVICE.mobile } {
+		display: block;
+    border: none;
+    padding: 20px;
+    &:before {
+      display: none;
+    }
+	}
 `;
 export const Content = styled.div`
 	flex-grow: 1;

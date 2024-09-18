@@ -54,7 +54,7 @@ const dateIntervalSlice = createSlice({
 			})
 			.addCase(fetchIntervals.fulfilled, (state, action) => {
 				state.loading = false;
-				state.segments = action.payload;
+				state.segments = action.payload || [];
 				state.currentInterval =
 					action.payload?.length > 0 ? action.payload[0] : null;
 			})
