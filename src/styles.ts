@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 
-export const ICONS_URL = `${process.env.PUBLIC_URL}/images/icons/`;
+export const ICONS_URL = `/images/icons/`;
 
 export const BACKGROUND_COLOR = "#F4F5F9";
 export const MAIN_COLOR_RGB = "66, 86, 122";
